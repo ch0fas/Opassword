@@ -1,3 +1,4 @@
+![image alt](https://github.com/ch0fas/Opassword/blob/main/resources/Opassword_BannerLogoV1.png?raw=true)
 # Opassword
 A simple but functional password manager made with Python
 
