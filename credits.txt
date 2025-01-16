@@ -1,0 +1,2 @@
+Logo used this svg lock: https://www.svgrepo.com/svg/532320/lock
+Logo also used JetBrains Mono (https://www.jetbrains.com/lp/mono/)

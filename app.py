@@ -1,14 +1,16 @@
 import tkinter as tk
 import ttkbootstrap as ttk
+import customtkinter as ctk
 from tkinter import messagebox
 from random import choice
 import time
 import json
 import webbrowser
+from settings import *
 
 #Window
 
-class Application(ttk.Window):
+class Application(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Opassword")
@@ -41,7 +43,7 @@ class Application(ttk.Window):
 
 #Launch Frame
 
-class LaunchFrame(ttk.Frame):
+class LaunchFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
         
@@ -49,17 +51,18 @@ class LaunchFrame(ttk.Frame):
 
         #Widgets
 
-        sign_in_label = ttk.Label(self, text="Sign In", font=("Arial", 36), background="black", anchor="center")
+        sign_in_label = ctk.CTkLabel(self, text="Sign In", font=("Arial", 36), bg_color="black", anchor="center")
         users_list = tk.Listbox(self)
-        app_creds = ttk.Button(master=self, text="App Credits", command= lambda: parent.show_frame(parent.appcredits))
-        create_account_label = ttk.Button(self, text="Create Account", command=lambda: parent.show_frame(parent.usercreateframe))
+        app_creds = ctk.CTkButton(master=self, text="App Credits", command= lambda: parent.show_frame(parent.appcredits),
+                                  fg_color=button_color, hover_color=hover_button_color, hover=True)
+        create_account_label = ctk.CTkButton(self, text="Create Account", command=lambda: parent.show_frame(parent.usercreateframe))
 
         #Grid Configure
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1,weight=8)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
 
         #Grid
         sign_in_label.grid(row=0, column=0, sticky="nsew", padx=1, pady=1)
@@ -68,7 +71,7 @@ class LaunchFrame(ttk.Frame):
         create_account_label.grid(row=0, column=1, sticky="nsew", padx=1, pady=1)
 
 #User Creation Frame
-class UserCreateFrame(ttk.Frame):
+class UserCreateFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -81,21 +84,21 @@ class UserCreateFrame(ttk.Frame):
             passtwo = password_entry2.get()
 
             if passone != passtwo:
-                confirm_label.config(text="THE PASSWORDS ARE DIFFERENT")
+                confirm_label.configure(text="THE PASSWORDS ARE DIFFERENT")
             else:
-                confirm_label.config(text="Passwords Are Set")
+                confirm_label.configure(text="Passwords Are Set")
 
         #Widgets
-        create_user_label = ttk.Label(self, text="Create A New User", font=("Arial", 36), background="black", anchor="center")
-        username_label = ttk.Label(self, text="Username: ")
+        create_user_label = ctk.CTkLabel(self, text="Create A New User", font=("Arial", 36), bg_color="black", anchor="center")
+        username_label = ctk.CTkLabel(self, text="Username: ")
         username_entry = ttk.Entry(self)
-        password_label = ttk.Label(self, text="Password: ")
+        password_label = ctk.CTkLabel(self, text="Password: ")
         password_entry = ttk.Entry(self)
-        password2_label = ttk.Label(self, text="Confirm Password: ")
+        password2_label = ctk.CTkLabel(self, text="Confirm Password: ")
         password_entry2 = ttk.Entry(self)
-        confirm_user = ttk.Button(self, text="Create User", command=check_password)
-        confirm_label = ttk.Label(self, text="", font=("Arial", 36), background="red", anchor="center")
-        back_launch = ttk.Button(self, text="Back To Main Page", command= lambda: parent.show_frame(parent.launchframe)) 
+        confirm_user = ctk.CTkButton(self, text="Create User", command=check_password)
+        confirm_label = ctk.CTkLabel(self, text="", font=("Arial", 36), bg_color="red", anchor="center")
+        back_launch = ctk.CTkButton(self, text="Back To Main Page", command= lambda: parent.show_frame(parent.launchframe)) 
 
         #Grid Config
         self.grid_rowconfigure(0, weight=2)
@@ -104,6 +107,8 @@ class UserCreateFrame(ttk.Frame):
         self.grid_rowconfigure(3, weight=1)
         self.grid_rowconfigure(4, weight=2)
         self.grid_rowconfigure(5, weight=3)
+        self.grid_columnconfigure(0,weight=1)
+        self.grid_columnconfigure(1, weight=1)
 
         #Grid
         create_user_label.grid(row=0, column=0, columnspan=2, sticky="nsew", padx=1, pady=1)
@@ -120,7 +125,7 @@ class UserCreateFrame(ttk.Frame):
 
 
 #Main Frame
-class MainFrame(ttk.Frame):
+class MainFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -137,7 +142,7 @@ class MainFrame(ttk.Frame):
 
 #App Credits Frame
 
-class AppCredits(ttk.Frame):
+class AppCredits(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
         
@@ -152,10 +157,10 @@ class AppCredits(ttk.Frame):
         disclaimer_text = "This is NOT a safe password manager, just a demo. I am not responsible for any lost information or damages. Please use at your own risk."
 
         #Widgets
-        me = ttk.Label(self, text="Made With 💌 by Sofi :)")
-        disclaimer_label = ttk.Label(self, text=disclaimer_text, font=("Arial", 14), background="red", justify="center")
-        disclaimer_label.bind('<Configure>', lambda e: disclaimer_label.config(wraplength=disclaimer_label.winfo_width()))
-        repo_button = ttk.Button(self, text="Repository on Github", command=open_web)
+        me = ctk.CTkLabel(self, text="Made With 💌 by Sofi :)")
+        disclaimer_label = ctk.CTkLabel(self, text=disclaimer_text, font=("Arial", 14), bg_color="red", justify="center")
+        disclaimer_label.bind('<Configure>', lambda e: disclaimer_label.configure(wraplength=disclaimer_label.winfo_width()))
+        repo_button = ctk.CTkButton(self, text="Repository on Github", command=open_web)
 
         #Grid
         me.pack()

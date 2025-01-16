@@ -1,4 +1,4 @@
-import json
+# Colors for button
 
-def create_user():
-    pass
+button_color = '#397367'
+hover_button_color = '#7DC95E'
